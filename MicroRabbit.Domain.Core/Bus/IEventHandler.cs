@@ -12,6 +12,7 @@ namespace MicroRabbit.Domain.Core.Bus
              Task Handle(TEvent @event);
     }
 
+    // To fix error of Circular Interface  Dependency 
     public interface IEventHandler
     {
         

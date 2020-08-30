@@ -7,10 +7,11 @@ namespace MicroRabbit.Domain.Core.Bus
 {
     public interface IEventBus
     {
+        // The 3 basic methods that's essential to EventBus
     
         Task SendCommand<T>(T command) where T : Command;
        
-       // to use reserved keyword as a variable , add @ sign in front of it . 
+       // To use reserved keyword as a variable , add @ sign in front of it . 
        void publish<T>(T @event) where T : Event;
        
        // TH defined the Handler for Event type T 

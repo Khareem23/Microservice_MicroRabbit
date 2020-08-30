@@ -107,11 +107,13 @@ namespace MicroRabbit.Infra.Bus
             var consumer = new AsyncEventingBasicConsumer(channel);
             
             // Delete : event Handler 
+            // Whenever this event fired , invoke the event handler( Consumer_Received )
             consumer.Received += Consumer_Received;
 
             channel.BasicConsume(eventName, true, consumer);
         }
 
+        // This is called by Subscribe Method to consume data from the Queue
         private async Task Consumer_Received(object sender, BasicDeliverEventArgs e)
         {
             var eventName = e.RoutingKey;
@@ -128,6 +130,8 @@ namespace MicroRabbit.Infra.Bus
             }
         }
 
+        
+        // This is called my Event Handler that's invoked inside Subscribe Method
         private async Task ProcessEvent(string eventName, string message)
         {
             if (_handlers.ContainsKey(eventName))
